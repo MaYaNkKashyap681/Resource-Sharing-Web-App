@@ -3,6 +3,7 @@ import * as mongoose from "mongoose";
 import * as bodyParser from "body-parser";
 import cookieParser = require("cookie-parser")
 import { config } from "./config/serverConfig"
+import { Request, Response } from 'express';
 import Controller from "./interface/controller.interface";
 import ErrorMiddleware from "./middlewares/error.middleware";
 
@@ -45,6 +46,11 @@ class App {
     controllers.forEach((controller) => {
       this.app.use("/", controller.router);
     });
+    this.app.use('/', (req: Request, res: Response) => {
+      res.status(200).json({
+        msg: "Api is Working Fine"
+      })
+    })
   }
 
   private initializeErrorHandler() {

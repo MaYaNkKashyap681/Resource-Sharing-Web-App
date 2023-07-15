@@ -6,7 +6,7 @@ import { config } from "./config/serverConfig";
 import { Request, Response } from "express";
 import Controller from "./interface/controller.interface";
 import ErrorMiddleware from "./middlewares/error.middleware";
-import * as cors from "cors";
+import cors = require("cors");
 
 class App {
   public app: express.Application;

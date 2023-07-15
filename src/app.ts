@@ -1,7 +1,7 @@
-import * as express from "express";
+import express = require('express');
 import * as mongoose from "mongoose";
 import * as bodyParser from "body-parser";
-import * as cookieParser from "cookie-parser";
+import cookieParser = require("cookie-parser")
 import { config } from "./config/serverConfig"
 import Controller from "./interface/controller.interface";
 import ErrorMiddleware from "./middlewares/error.middleware";

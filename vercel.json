@@ -11,5 +11,8 @@
             "src": "/(.*)",
             "dest": "src/index.ts"
         }
-    ]
+    ],
+    "env": {
+        "mongo_uri": "mongodb+srv://root:root@cluster0.es8kxvv.mongodb.net/?retryWrites=true&w=majority"
+    }
 }

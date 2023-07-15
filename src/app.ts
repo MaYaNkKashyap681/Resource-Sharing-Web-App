@@ -1,11 +1,12 @@
-import express = require('express');
+import express = require("express");
 import * as mongoose from "mongoose";
 import * as bodyParser from "body-parser";
-import cookieParser = require("cookie-parser")
-import { config } from "./config/serverConfig"
-import { Request, Response } from 'express';
+import cookieParser = require("cookie-parser");
+import { config } from "./config/serverConfig";
+import { Request, Response } from "express";
 import Controller from "./interface/controller.interface";
 import ErrorMiddleware from "./middlewares/error.middleware";
+import * as cors from "cors";
 
 class App {
   public app: express.Application;
@@ -39,6 +40,7 @@ class App {
     this.app.use(express.json());
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: false }));
+    this.app.use(cors());
     this.app.use(cookieParser());
   }
 
@@ -46,11 +48,11 @@ class App {
     controllers.forEach((controller) => {
       this.app.use("/", controller.router);
     });
-    this.app.use('/', (req: Request, res: Response) => {
+    this.app.use("/", (req: Request, res: Response) => {
       res.status(200).json({
-        msg: "Api is Working Fine"
-      })
-    })
+        msg: "Api is Working Fine",
+      });
+    });
   }
 
   private initializeErrorHandler() {

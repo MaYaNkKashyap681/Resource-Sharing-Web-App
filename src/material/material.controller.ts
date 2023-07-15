@@ -65,6 +65,7 @@ class MaterialController implements Controller {
     next: NextFunction
   ) => {
     try {
+      console.log("Request arrived")
       const response = await this.materialservice.addNew(req.body);
       return res.status(201).json({
         success: true,

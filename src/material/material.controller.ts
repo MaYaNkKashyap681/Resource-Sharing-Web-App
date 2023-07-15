@@ -1,7 +1,7 @@
 import { Router, Request, Response, NextFunction } from "express";
 import Controller from "../interface/controller.interface";
 import MaterialService from "./material.service";
-import { validate } from "class-validator";
+
 
 class MaterialController implements Controller {
   public path = "/material";

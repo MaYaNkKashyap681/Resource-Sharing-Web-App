@@ -44,7 +44,7 @@ def extract_video_id(url):
 
 def generate_youtube_thumbnail(video_id, thumbnail_path):
     # Make a request to the YouTube Data API to get video details
-    api_key = "AIzaSyCcIMv4hdu6aJzR0H6K2qH4cwY093LZFUw"  # Replace with your own YouTube Data API key
+    api_key = ""  # Replace with your own YouTube Data API key
     video_info_url = f"https://www.googleapis.com/youtube/v3/videos?part=snippet&id={video_id}&key={api_key}"
     response = requests.get(video_info_url)
     print(response)

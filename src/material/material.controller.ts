@@ -1,7 +1,17 @@
 import { Router, Request, Response, NextFunction } from "express";
 import Controller from "../interface/controller.interface";
 import MaterialService from "./material.service";
+import { spawn } from "child_process";
 
+const path = require('path');
+
+
+// const scriptPath = path.join(__dirname, '../python/thumbnailmaker.py');
+
+const venvPath = "D:/Intern Tasks/resource-sharing-webapp/server/env/Scripts/python"
+const pythonFilePath = 'D:/Intern Tasks/resource-sharing-webapp/server/python/thumbnailmaker.py';
+console.log(pythonFilePath)
+ 
 
 class MaterialController implements Controller {
   public path = "/material";
@@ -17,6 +27,7 @@ class MaterialController implements Controller {
     this.router.get(`${this.path}/all`, this.getAllMaterials);
     this.router.get(`${this.path}/:mId`, this.getMaterial);
     this.router.post(`${this.path}/add`, this.addMaterial);
+    this.router.post(`${this.path}/python`, this.executeScript);
   }
 
   //Method to get all material
@@ -65,7 +76,7 @@ class MaterialController implements Controller {
     next: NextFunction
   ) => {
     try {
-      console.log("Request arrived")
+      console.log("Request arrived");
       const response = await this.materialservice.addNew(req.body);
       return res.status(201).json({
         success: true,
@@ -77,6 +88,20 @@ class MaterialController implements Controller {
       next(error);
     }
   };
+
+  private async executeScript(req: Request, res: Response) {
+    const pythonProcess = spawn(venvPath, [pythonFilePath]);
+
+    pythonProcess.stdout.on("data", (data) => {
+      console.log(`Python script output: ${data}`);
+    });
+
+    pythonProcess.stderr.on("data", (data) => {
+      console.error(`Python script error: ${data}`);
+    });
+
+    res.status(200).json({ message: "Python script execution triggered" });
+  }
 }
 
 export default MaterialController;

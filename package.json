@@ -17,6 +17,7 @@
     "@types/dotenv": "^8.2.0",
     "axios": "^1.4.0",
     "body-parser": "^1.20.2",
+    "child_process": "^1.0.2",
     "cloudinary": "^1.37.3",
     "concurrently": "^8.2.0",
     "cookie-parser": "^1.4.6",
